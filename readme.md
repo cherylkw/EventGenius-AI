@@ -1,6 +1,6 @@
 # Music Events Recommendation Assistant 🎵
 
-## 1. App Name and Short Description
+## 1. Overview
 **Music Events Recommendation Assistant**  
 An intelligent application designed to provide personalized music event recommendations using user preferences and external APIs like Ticketmaster. It integrates advanced AI capabilities for prompt-based keyword extraction, real-time data retrieval, and response generation, ensuring a user-friendly experience.
 
