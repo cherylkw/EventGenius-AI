@@ -271,25 +271,42 @@ def generate_response(events):
     if "error" in events:
         return events["error"]
 
-    event_details = "".join([
-        f"""
-        <div style=\"display: flex; align-items: flex-start; margin-bottom: 20px;\">
-            <div style=\"flex: 3;\">
-                <strong>{i + 1}. Event Name:</strong> {event.get('name', 'Unknown Event')}<br>
-                <strong>Venue:</strong> {event.get('_embedded', {}).get('venues', [{}])[0].get('name', 'Unknown Venue')}, {event.get('_embedded', {}).get('venues', [{}])[0].get('city', {}).get('name', 'Unknown City')}<br>
-                <strong>Date and Time:</strong> {event.get('dates', {}).get('start', {}).get('localDate', 'Unknown Date')} at {event.get('dates', {}).get('start', {}).get('localTime', 'Unknown Time')} ({event.get('dates', {}).get('timezone', 'Time Zone not specified')})<br>
-                <strong>Ticket Price:</strong> {f"${{{event.get('priceRanges', [{}])[0].get('min', 'N/A')}}} - ${{{event.get('priceRanges', [{}])[0].get('max', 'N/A')}}}" if event.get('priceRanges') else 'Price not specified'}<br>
-                <strong>Event URL:</strong> <a href=\"{event.get('url', '#')}\">Click here</a>
-            </div>
-            <div style=\"flex: 1; text-align: right; margin-left: 20px;\">
-                <img src=\"{event.get('images', [{}])[0].get('url', '')}\" alt=\"Event Image\" style=\"max-width: 150px; border-radius: 8px;\">
-            </div>
-        </div>
-        """
+    # Prepare a detailed prompt for GPT-3.5
+    event_summaries = "\n".join([
+        f"{i + 1}. Event Name: {event.get('name', 'Unknown Event')}\n"
+        f"Venue: {event.get('_embedded', {}).get('venues', [{}])[0].get('name', 'Unknown Venue')} in {event.get('_embedded', {}).get('venues', [{}])[0].get('city', {}).get('name', 'Unknown City')}\n"
+        f"Date and Time: {event.get('dates', {}).get('start', {}).get('localDate', 'Unknown Date')} at {event.get('dates', {}).get('start', {}).get('localTime', 'Unknown Time')}\n"
+        f"Ticket Price: {f'${{{event.get('priceRanges', [{}])[0].get('min', 'N/A')}}} - ${{{event.get('priceRanges', [{}])[0].get('max', 'N/A')}}}' if event.get('priceRanges') else 'Price not specified'}\n"
+        f"Event URL: {event.get('url', '#')}\n"
+        f"Event Image: {event.get('images', [{}])[0].get('url', 'Image not available')}\n"
         for i, event in enumerate(events.get("_embedded", {}).get("events", []))
     ])
 
-    return event_details if event_details else "No events found matching your query."
+    prompt = f"""
+    You are a helpful assistant providing detailed responses about music events. Based on the following event details, generate a friendly and engaging response to present these events to the user:
+    
+    Event Details:
+    {event_summaries}
+    
+    If no events are found, provide a polite and helpful message encouraging the user to try a different query.
+    """
+
+    # Call GPT-3.5 for response generation
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "Insert prompt here : Recommend relevant live music events based ...."
+            },
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=500,
+        temperature=0.1
+    )
+
+    try:
+        return response["choices"][0]["message"]["content"]
+    except (KeyError, IndexError):
+        return "Sorry, an error occurred while generating the response. Please try again later."
 
 # Streamlit UI with Tabs for Main and Admin Pages
 tabs = st.tabs(["Main Page", "Admin Page"])
@@ -327,14 +344,18 @@ with tabs[0]:
         )
 
         if st.button("Submit Feedback"):
-            st.session_state["feedback_selection"][st.session_state["last_query"]] = feedback
-            cursor.execute("""
-                UPDATE query_history
-                SET feedback = ?, timestamp = ?
-                WHERE id = ?
-            """, (feedback, datetime.now(), st.session_state["last_query_id"]))
-            conn.commit()
-            st.success("Thank you for your feedback!")
+            feedback = st.session_state["feedback_selection"][st.session_state["last_query"]]
+            try:
+                cursor.execute("""
+                    UPDATE query_history
+                    SET feedback = ?, timestamp = ?
+                    WHERE id = ?
+                """, (feedback, datetime.now(), st.session_state["last_query_id"]))
+                conn.commit()
+                st.success("Thank you for your feedback!")
+            except sqlite3.Error as e:
+                st.error(f"Error updating feedback: {e}")
+
 
     # Update sidebar with the current workflow log
     st.sidebar.markdown("## Workflow Logs")
