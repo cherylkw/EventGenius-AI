@@ -71,7 +71,7 @@ This application employs **RAG principles** to enhance response accuracy and per
 ---
 
 ## 5. POC
-<iframe src="https://www.loom.com/share/ab5c51d4e8704a12a23fb6f74fdf9c46?sid=3cee1c8c-c10c-4cd3-b9f3-518f1c2bb52f" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="width:100%; height:360px;"></iframe>
+https://www.loom.com/share/ab5c51d4e8704a12a23fb6f74fdf9c46?sid=3cee1c8c-c10c-4cd3-b9f3-518f1c2bb52f
 
 ---
 
