@@ -70,7 +70,10 @@ This application employs **RAG principles** to enhance response accuracy and per
 
 ---
 
-## 5. Future Development
+## 5. Demo 
+https://www.loom.com/share/ab5c51d4e8704a12a23fb6f74fdf9c46?sid=3cee1c8c-c10c-4cd3-b9f3-518f1c2bb52f
+
+## 6. Future Development
 ### Suggested Enhancements:
 1. **Database Upgrade**:
    - Transition from SQLite to NoSQL (e.g., MongoDB) for scalability.
@@ -106,7 +109,7 @@ This application employs **RAG principles** to enhance response accuracy and per
 
 ---
 
-## 6. Choosing the Right LLM
+## 7. Choosing the Right LLM
 When selecting an LLM for this project, consider:
 - **Task-Specific Requirements**: Use GPT-4 for detailed, nuanced responses; use lightweight models for simpler tasks.
 - **Token Limits**: Larger context windows (e.g., GPT-4) allow for more complex queries and detailed outputs.
@@ -115,5 +118,5 @@ When selecting an LLM for this project, consider:
 
 ---
 
-## 7. Acknowledgments
+## 8. Acknowledgments
 This project integrates modern AI techniques and APIs to create an intelligent, real-time recommendation system. Inspired by the power of **agentic workflows**, **RAG principles**, and **prompt engineering**, it aims to deliver a highly personalized user experience.
