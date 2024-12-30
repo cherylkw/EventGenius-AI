@@ -22,8 +22,8 @@ if "feedback_selection" not in st.session_state:
 
 # Load environment variables
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
-TICKETMASTER_API_KEY = os.getenv("EVENTS_API_KEY")
+openai.api_key = ""
+TICKETMASTER_API_KEY = ""
 
 # Custom adapter to convert datetime to string
 def adapt_datetime(dt):
@@ -273,8 +273,8 @@ def generate_response(events):
     ])
 
     prompt = f"""
-    You are a helpful assistant providing detailed responses about music events. Based on the following event details, generate a friendly and engaging response to present these events to the user:
-    
+    You are a helpful assistant providing detailed responses about music events....
+
     Event Details:
     {event_summaries}
     
