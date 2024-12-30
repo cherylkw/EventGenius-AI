@@ -206,24 +206,14 @@ def extract_keywords(input_prompt):
     messages = [
         {
             "role": "system",
-            "content": "You are a music event assistant. Your task is to understand the user's input, extract relevant keywords for artists, locations, and timeframes, and generate a query for the Ticketmaster API. Ensure that the 'keyword' extracted from the user query matches the exact artist's name or band name provided by the user without including partial matches."
-        },
+            "content": "Your prompt here"},
         {
             "role": "user",
             "content": f"""
-            Given the following user query, identify:
-            1. Keywords (artists, genres, etc.).
-            2. Location (city or region).
-            3. Dates or timeframes.
+            ........
 
             Construct a Ticketmaster API query in the following JSON format:
-            {{
-                "keyword": "<artist/genre>",
-                "city": "<city>",
-                "startDateTime": "<ISO 8601 start date>",
-                "endDateTime": "<ISO 8601 end date>"
-            }}
-
+            ...........
             User Query: "{input_prompt}"
             """
         }
