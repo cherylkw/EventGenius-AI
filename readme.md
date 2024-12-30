@@ -1,4 +1,4 @@
-# Music Events Recommendation Assistant 🎵
+# EventGenius AI 🎵
 
 ## 1. Overview
 **Music Events Recommendation Assistant**  
@@ -38,11 +38,9 @@ This application leverages an **Agentic AI Workflow** that breaks down user quer
    - Orchestrates the workflow by assigning tasks to sub-agents and consolidating their outputs.
 
 3. **Sub-Agents**:
-   - **Keyword Extraction Agent**:
-     - Extracts key components from the query, such as artist, location, and timeframe, using GPT-3.5 with carefully crafted prompts.
-     - Produces a structured JSON query.
-   - **API Query Generation Agent**:
-     - Converts extracted keywords into a Ticketmaster API-compatible query.
+   - **Keyword Extraction and API Query Generation Agent**:
+     - Combines the tasks of extracting key components from the user query (such as artist, location, and timeframe) and generating a structured JSON query compatible with the Ticketmaster API.
+     - Uses GPT-3.5 with carefully crafted prompts to infer the user input and directly output the JSON for the next step.
    - **Data Fetching Agent**:
      - Retrieves real-time event data from the Ticketmaster API.
    - **Data Processing Agent**:
