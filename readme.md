@@ -26,7 +26,7 @@ An intelligent application designed to provide personalized music event recommen
 ## 3. Workflow
 ### AI agent Workflow
 
-![AI agent Workflow](./images/workflow.jpg)
+![AI agent Workflow](./workflow.jpg)
 
 This application leverages an **AI agent Workflow** that breaks down user queries into modular tasks handled by specialized sub-agents. Here's how the workflow operates:
 
