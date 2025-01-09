@@ -27,7 +27,7 @@ An intelligent application designed to provide personalized music event recommen
 ---
 
 ## 3. Workflow
-### AI agent Workflow
+### Agentic Workflow with AI agent
 
 ![AI agent Workflow](./workflow.jpg)
 
