@@ -1,4 +1,7 @@
-# EventGenius AI 🎵
+# EventGenius AI 🎵 - Prototype
+
+## 0. Intro
+This prototype is part of the capstone project from AI production management with OpenAI course, BRD is not provided here. 
 
 ## 1. Overview
 **Music Events Recommendation Assistant**  
