@@ -31,7 +31,7 @@ An intelligent application designed to provide personalized music event recommen
 
 ![AI agent Workflow](./workflow.jpg)
 
-This application leverages an **AI agent Workflow** that breaks down user queries into modular tasks handled by specialized sub-agents. Here's how the workflow operates:
+This application leverages an **Agentic Workflow** that breaks down user queries into modular tasks handled by specialized sub-agents. Here's how the workflow operates:
 
 1. **User Query**:
    - The user submits a query, such as:  
